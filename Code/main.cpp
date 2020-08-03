@@ -10,14 +10,14 @@ int main()
 {
 	union data2{
 		int length;
-		float with;
+		float width;
 	};
 
 	data2 size;
 	size.length =5;
 
 
-	std::cout<<"value is" <<size.with << std::endl;
+	std::cout<<"value is" <<size.width << std::endl;
 }
 
 
