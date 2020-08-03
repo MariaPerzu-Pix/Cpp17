@@ -5,21 +5,16 @@
  *      Author: mariapa
  */
 
+#include <variant>
 #include <iostream>
+
 int main()
 {
-	union data2{
-		int length;
-		float width;
-	};
+    std::variant<int, float> size;
 
-	data2 size;
-	size.length =5;
+    size = 5;
 
+    std::cout<<"int value is "<< std::get<int>(size)<<std::endl;
 
-	std::cout<<"value is" <<size.width << std::endl;
 }
-
-
-
 
