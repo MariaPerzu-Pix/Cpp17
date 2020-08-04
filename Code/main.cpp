@@ -22,9 +22,19 @@ int main()
     id = myVar.index();
     std::cout<<"variant string "<< x2 << "          myVar.index(): " <<id<<std::endl;
 
+    if(std::holds_alternative<int>(myVar))
+    	{
+    	   std::cout<<"current alternative is int"<<std::endl;
+    	}
+    else
+       {
+    	std::cout<<"current alternative is NOT int"<<std::endl;
+       }
 
 
     return 0;
 
 }
+
+
 
