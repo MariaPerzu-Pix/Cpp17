@@ -10,11 +10,21 @@
 
 int main()
 {
-    std::variant<int, float> size;
+    std::variant<int,double, std::string, bool> myVar;
 
-    size = 5;
+    myVar =50.01;
+    auto x1 = std::get<double>(myVar);
+    int id = myVar.index();
+    std::cout<<"variant double "<< x1<<"          myVar.index(): " <<id<<std::endl;
 
-    std::cout<<"int value is "<< std::get<int>(size)<<std::endl;
+    myVar = std::string("margaritas para todos");
+    auto x2 = std::get<2>(myVar);
+    id = myVar.index();
+    std::cout<<"variant string "<< x2 << "          myVar.index(): " <<id<<std::endl;
+
+
+
+    return 0;
 
 }
 
