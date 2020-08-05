@@ -10,7 +10,7 @@
 
 int main()
 {
-	std::optional<int> i;
+	std::optional<int> i(38);
 
 	if (i)
     	std::cout<< "Filled" <<std::endl;
