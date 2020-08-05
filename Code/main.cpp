@@ -5,32 +5,28 @@
  *      Author: mariapa
  */
 
-#include <variant>
+#include <optional>
 #include <iostream>
+
+   std::optional<std::string> compose_message(std::string inp)
+    {
+    	std::string mess ="all right";
+    	if(inp == "problem")
+    		return {};
+    	return mess;
+    }
 
 int main()
 {
-    std::variant<int,double, std::string, bool> myVar;
+	std::string n =" ";
+	std::cout<<"Enter a name"<<std::endl;
+	std::cin>>n;
 
-    myVar =50.01;
-    auto x1 = std::get<double>(myVar);
-    int id = myVar.index();
-    std::cout<<"variant double "<< x1<<"          myVar.index(): " <<id<<std::endl;
-
-    myVar = std::string("margaritas para todos");
-    auto x2 = std::get<2>(myVar);
-    id = myVar.index();
-    std::cout<<"variant string "<< x2 << "          myVar.index(): " <<id<<std::endl;
-
-    if(std::holds_alternative<int>(myVar))
-    	{
-    	   std::cout<<"current alternative is int"<<std::endl;
-    	}
-    else
-       {
-    	std::cout<<"current alternative is NOT int"<<std::endl;
-       }
-
+    if (auto m = compose_message(n))
+    	std::cout<< *m <<std::endl; //note the dereference (*)
+    else {
+    	std::cout<< "there was a problem" <<std::endl; //handle
+    }
 
     return 0;
 
