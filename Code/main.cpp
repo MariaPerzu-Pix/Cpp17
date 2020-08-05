@@ -5,17 +5,27 @@
  *      Author: mariapa
  */
 
-#include <optional>
+#include <any>
 #include <iostream>
+
+std::any compose_message(std::string inp)
+{
+	std::string ok = "all right";
+	int nu = 404;
+	if(inp=="problem")
+		return nu;
+	else
+		return ok;
+}
 
 int main()
 {
-	std::optional<int> i(38);
+	std::string name = " ";
+	std::cout<< "Enter a name" <<std::endl;
+	std::cin>>name;
 
-	if (i)
-    	std::cout<< "Filled" <<std::endl;
-	else
-    	std::cout<< "Empty" <<std::endl;
+	auto m = compose_message(name);
+    std::cout<< std::any_cast<std::string>(m) <<std::endl;
     return 0;
 }
 
