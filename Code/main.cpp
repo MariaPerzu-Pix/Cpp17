@@ -7,41 +7,20 @@
 
 
 #include <iostream>
-#include <functional>
+#include <tuple>
 
-struct S
+template<typename... Ts>
+void print_tuple (const std::tuple<Ts...> &tuple)
 {
-	const int j = 5;
-	int do_something(const int i)
-	{
-		return j+i;
-	}
-	int do_something_2(const int i)
-	{
-		return j+i;
-	}
-};
+    std::apply ([] (const auto &... elem)
+                {
+                    ((std::cout << elem << '\n'), ...);
+                },
+                tuple);
+}
 
-int main()
-{
-	S s;
-	std::cout<< s.do_something(3)<<"\n"; //8
-
-	auto funtion_poiter = &S::do_something;
-	int (S::*fp2)(int) = nullptr;
-
-	if(true){
-		fp2 = &S::do_something_2;
-	} else{
-		fp2 = &S::do_something;
-	}
-
-	std::cout<< (s.*funtion_poiter)(2)<<"\n";// prints7
-	std::cout<< std::invoke(&S::do_something_2, s, 2)<<"\n";// prints7
-	std::cout<< (s.*fp2)(1)<<"\n";// prints 6
-	std::cout<< std::invoke(&S::do_something, s, 1)<<"\n";// prints6
-	std::cout<< std::invoke(&S::j, s)<<"\n";// can also access member data
-
-
+int main() {
+    const std::tuple<int, char> t = std::make_tuple(5, 'a');
+    print_tuple(t);
 }
 
