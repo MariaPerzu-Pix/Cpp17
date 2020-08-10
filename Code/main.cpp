@@ -7,7 +7,7 @@
 
 
 #include <iostream>
-
+#include <functional>
 
 struct S
 {
@@ -37,6 +37,8 @@ int main()
 	}
 
 	std::cout<< (s.*funtion_poiter)(2)<<"\n";// prints7
+	std::cout<< std::invoke(&S::do_something_2, s, 2)<<"\n";// prints7
 	std::cout<< (s.*fp2)(1)<<"\n";// prints 6
+	std::cout<< std::invoke(&S::do_something, s, 1)<<"\n";// prints6
 }
 
