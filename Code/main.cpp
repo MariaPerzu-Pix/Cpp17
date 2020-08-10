@@ -40,5 +40,8 @@ int main()
 	std::cout<< std::invoke(&S::do_something_2, s, 2)<<"\n";// prints7
 	std::cout<< (s.*fp2)(1)<<"\n";// prints 6
 	std::cout<< std::invoke(&S::do_something, s, 1)<<"\n";// prints6
+	std::cout<< std::invoke(&S::j, s)<<"\n";// can also access member data
+
+
 }
 
