@@ -5,14 +5,38 @@
  *      Author: mariapa
  */
 
-#include <string_view>
-#include <string>
-#include <algorithm>
+
 #include <iostream>
 
-std::string_view bad()
+
+struct S
 {
-	string s = "once there";
-	return {$s[5],4};
+	const int j = 5;
+	int do_something(const int i)
+	{
+		return j+i;
+	}
+	int do_something_2(const int i)
+	{
+		return j+i;
+	}
+};
+
+int main()
+{
+	S s;
+	std::cout<< s.do_something(3)<<"\n"; //8
+
+	auto funtion_poiter = &S::do_something;
+	int (S::*fp2)(int) = nullptr;
+
+	if(true){
+		fp2 = &S::do_something_2;
+	} else{
+		fp2 = &S::do_something;
+	}
+
+	std::cout<< (s.*funtion_poiter)(2)<<"\n";// prints7
+	std::cout<< (s.*fp2)(1)<<"\n";// prints 6
 }
 
