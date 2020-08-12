@@ -7,37 +7,27 @@
 
 
 #include <iostream>
-#include <cassert>
-#include <fstream>
 #include <filesystem>
 
-
-int main(int argc, char* argv[])
+void print_directory(std::filesystem::path p)
+try
 {
-	if (argc <2) {
-		std::cerr<<"arguments expected\n";
-		return 1;
+	if(std::filesystem::is_directory(p))
+	{
+		std::cout<<p<< ":\n";
+		for(const std::filesystem::directory_entry& x : std::filesystem::directory_iterator{p})
+			std::cout<< "  "<< x.path() << '\n';
 	}
+}
+catch (const std::filesystem::filesystem_error& ex) {
+	std::cerr<<ex.what()<< '\n';
+}
 
-    std::filesystem::path p {argv[1]}; //create a path from command line
-
-    assert(std::filesystem::exists(p));
-
-    if (std::filesystem::is_regular_file(p))
-   	std::cout << p << " is a file; its size first is "<< std::filesystem::file_size(p)<< '\n';
-
-    std::ofstream f {p};
-    f<<"Hello XD";
-    f.close();
-
-    std::cout << p << " is a file; its size then is "<< std::filesystem::file_size(p)<< '\n';
-
-    f.open(p);
-    f<<"";
-    f.close();
-
-    std::cout << p << " is a file; its size then is "<< std::filesystem::file_size(p)<< '\n';
-
+int main()
+{
+    print_directory("."); // current directory
+    print_directory(".."); //parent directory
+    print_directory("/"); //linux root directory
     return 0;
 }
 
