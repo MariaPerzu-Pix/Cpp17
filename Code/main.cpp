@@ -7,20 +7,18 @@
 
 
 #include <iostream>
-#include <tuple>
+#include <cassert>
+#include <filesystem>
 
-template<typename... Ts>
-void print_tuple (const std::tuple<Ts...> &tuple)
+
+int main()
 {
-    std::apply ([] (const auto &... elem)
-                {
-                    ((std::cout << elem << '\n'), ...);
-                },
-                tuple);
-}
+    std::filesystem::path f ="FileSystem_add/fs.cpp";
+    assert(std::filesystem::exists(f));
 
-int main() {
-    const std::tuple<int, char> t = std::make_tuple(5, 'a');
-    print_tuple(t);
+    if (std::filesystem::is_regular_file(f))
+   	std::cout << f << " is a file; its size is "<< std::filesystem::file_size(f)<< '\n'; //The size of the file, in bytes.
+
+    return 0;
 }
 
