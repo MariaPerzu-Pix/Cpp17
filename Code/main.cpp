@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <fstream>
 #include <filesystem>
 
 
@@ -23,7 +24,19 @@ int main(int argc, char* argv[])
     assert(std::filesystem::exists(p));
 
     if (std::filesystem::is_regular_file(p))
-   	std::cout << p << " is a file; its size is "<< std::filesystem::file_size(p)<< '\n';
+   	std::cout << p << " is a file; its size first is "<< std::filesystem::file_size(p)<< '\n';
+
+    std::ofstream f {p};
+    f<<"Hello XD";
+    f.close();
+
+    std::cout << p << " is a file; its size then is "<< std::filesystem::file_size(p)<< '\n';
+
+    f.open(p);
+    f<<"";
+    f.close();
+
+    std::cout << p << " is a file; its size then is "<< std::filesystem::file_size(p)<< '\n';
 
     return 0;
 }
