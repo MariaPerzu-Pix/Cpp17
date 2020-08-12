@@ -11,13 +11,19 @@
 #include <filesystem>
 
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::filesystem::path f ="FileSystem_add/fs.cpp";
-    assert(std::filesystem::exists(f));
+	if (argc <2) {
+		std::cerr<<"arguments expected\n";
+		return 1;
+	}
 
-    if (std::filesystem::is_regular_file(f))
-   	std::cout << f << " is a file; its size is "<< std::filesystem::file_size(f)<< '\n'; //The size of the file, in bytes.
+    std::filesystem::path p {argv[1]}; //create a path from command line
+
+    assert(std::filesystem::exists(p));
+
+    if (std::filesystem::is_regular_file(p))
+   	std::cout << p << " is a file; its size is "<< std::filesystem::file_size(p)<< '\n';
 
     return 0;
 }
